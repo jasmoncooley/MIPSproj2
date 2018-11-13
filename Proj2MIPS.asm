@@ -18,3 +18,7 @@
 			beqz $t1, exit
 			beq $t1,' ',loop #if it is space, the go to the top of the loop
             		
+            		addi $t0, $t0, 1
+   			addi $a0, $a0, 1
+            
+       			j loop
