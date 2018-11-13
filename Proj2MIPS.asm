@@ -27,4 +27,8 @@
     			la $a0, 69        # @ (64)
     			syscall
     			j end
+    		tooLong:
+			li $v0, 4
+			la $a0, tooLongMessage
+			syscall
     	
