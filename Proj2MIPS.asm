@@ -22,3 +22,9 @@
    			addi $a0, $a0, 1
             
        			j loop
+		exit:
+     			li $v0, 11        # Print chars
+    			la $a0, 69        # @ (64)
+    			syscall
+    			j end
+    	
