@@ -13,3 +13,8 @@
 		syscall
 
 		loop:
+			lbu $t1, 0($a0) #load the character into t1
+			bge $t1, $a1, tooLong
+			beqz $t1, exit
+			beq $t1,' ',loop #if it is space, the go to the top of the loop
+            		
