@@ -63,8 +63,8 @@
 			
 		checkString:
 		lb $t5, 0($a0)
-		beqz $t5, convert  #End if null character is reached
-		beq $t5, $t1, convert  #End loop if NL is detected
+		beqz $t5, conversion  #End if null character is reached
+		beq $t5, $t1, conversion  #End loop if NL is detected
 		slti $t6, $t5, 48    #Check if less than 0 
 		bne $t6, $zero, baseError
 		slti $t6, $t5, 58    #Check if less than 9 
@@ -85,9 +85,18 @@
 
 		baseError:
 			li $v0, 4
-			la $a0, notInRange
+			la $a0, notInRange #not in correct range with base 32
 			syscall
 			j end
 
 
-		
+			
+		conversion:
+			move $a0, $t4
+			addi $t7, $t7, 0  #decimal num is zero
+			add $s0, $s0, $t0
+			addi $s0, $s0, -1	
+			li $s3, 3
+			li $s2, 2
+			li $s1, 1
+			li $s5, 0
