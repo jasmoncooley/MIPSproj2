@@ -10,29 +10,32 @@
 	
 		li $v0, 8 #read in integer
 		la $a0, user
-		li $a1, 65 #this is A
+		addi $t1, $t1, 10  #Load line feed char
 		syscall
 
 		LengthSpaceLoop:
 			lbu $t1, 0($a0) #load the character into t1
-			bge $t1, $a1, tooLong
-			beqz $t1, exit
+			beqz $t1, empty
+			beq $t2, $t1, done   #End when line feed is detected
 			beq $t1,' ',skipSpace #if it is space then go to the next value
-            		#addi $t0, $t0, 1
+            		addi $t0, $t0, 1 #count the amount of characters
    			addi $a0, $a0, 1
        			j loop
 		exit:
-     			li $v0, 11        # Print chars
-    			la $a0, 69        # @ (64)
-    			syscall
     			j end
     		tooLong:
 			li $v0, 4
 			la $a0, tooLongMessage
 			syscall
 			j end
+		empty:
+			li $v0, 4
+			la $a0, emptyMessage
+			syscall
+			j end
 		skipSpace:
 			addi $a0,$a0,1
+			sub $t0, $t0, 1 #if we skip a space, we want to subtract that character frorm our length
 			j LengthSpaceLoop
 		range1:
 			li $v0, 4
