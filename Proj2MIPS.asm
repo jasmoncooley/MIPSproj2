@@ -104,23 +104,32 @@
 		beqz $s4, decimalnum
 		beq $s4, $t1, decimalnum
 		slti $t6, $s4, 58
-		bne $t6, $zero, zeroToNine
+		bne $t6, $zero, 029
 		slti $t6, $s4, 89
 		bne $t6, $zero, A2V
 		slti $t6, $s4, 121
 		bne $t6, $zero, a2v
 		
 
-		zeroToNine:
+		029:
 			addi $s4, $s4, -48
-			j nextStep
+			j loadexP
 		A2V:
 			addi $s4, $s4, -55
-			j nextStep
+			j loadexP
 		a2v:
 			addi $s4, $s4, -87
-		nextStep:
-			beq $s0, $s3, threePower
-			beq $s0, $s2, twoPower
-			beq $s0, $s1, onePower
-			beq $s0, $s5, zeroPower
+		loadexP:
+			beq $s0, $s3, thirdEx
+			beq $s0, $s2, SecEx
+			beq $s0, $s1, one
+			beq $s0, $s5, zero
+			
+		thirdEx:
+			li $s6, 32768
+			mult $s4, $s6
+			mflo $s7
+			add $t7, $t7, $s7
+			addi $s0, $s0, -1
+			addi $a0, $a0, 1
+			j convertString
