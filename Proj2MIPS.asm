@@ -79,24 +79,33 @@
 		bne $t6, $zero, Increment
 		bgt $t5, 118, baseError   #Check if is greater than v
 
-			Increment:
-			addi $a0, $a0, 1
-			j checkString
+		Increment:
+		addi $a0, $a0, 1
+		j checkString
 
 		baseError:
-			li $v0, 4
-			la $a0, notInRange #not in correct range with base 32
-			syscall
-			j end
-
-
+		li $v0, 4
+		la $a0, notInRange #not in correct range with base 32
+		syscall
+		j end
 			
 		conversion:
-			move $a0, $t4
-			addi $t7, $t7, 0  #decimal num is zero
-			add $s0, $s0, $t0
-			addi $s0, $s0, -1	
-			li $s3, 3
-			li $s2, 2
-			li $s1, 1
-			li $s5, 0
+		move $a0, $t4
+		addi $t7, $t7, 0  #decimal num is zero
+		add $s0, $s0, $t0
+		addi $s0, $s0, -1	
+		li $s3, 3
+		li $s2, 2
+		li $s1, 1
+		li $s5, 0
+			
+		convertString:
+		lb $s4, 0($a0)
+		beqz $s4, decimalnum
+		beq $s4, $t1, decimalnum
+		slti $t6, $s4, 58
+		bne $t6, $zero, zeroToNine
+		slti $t6, $s4, 89
+		bne $t6, $zero, A2V
+		slti $t6, $s4, 121
+		bne $t6, $zero, a2v
