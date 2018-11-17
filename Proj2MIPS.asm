@@ -129,7 +129,7 @@
 			li $s6, 32768
 			mult $s4, $s6
 			mflo $s7
-			add $t7, $t7, $s7
+			add $t7, $t7, $s7 #adds the multiplied number to the result
 			addi $s0, $s0, -1
 			addi $a0, $a0, 1
 			j convertString
@@ -138,7 +138,21 @@
 			li $s6, 1024
 			mult $s4, $s6
 			mflo $s7
-			add $t7, $t7, $s7
+			add $t7, $t7, $s7 #adds the multiplied number to the result
 			addi $s0, $s0, -1
 			addi $a0, $a0, 1
 			j convertString
+		one:
+			li $s6, 32
+			mult $s4, $s6
+			mflo $s7
+			add $t7, $t7, $s7 #adds the multiplied number to the result
+			addi $s0, $s0, -1
+			addi $a0, $a0, 1
+			j convertString
+
+		zero:
+			li $s6, 1
+			mult $s4, $s6
+			mflo $s7
+			add $t7, $t7, $s7
