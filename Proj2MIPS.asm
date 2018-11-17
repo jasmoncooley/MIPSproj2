@@ -109,3 +109,13 @@
 		bne $t6, $zero, A2V
 		slti $t6, $s4, 121
 		bne $t6, $zero, a2v
+		
+
+		zeroToNine:
+			addi $s4, $s4, -48
+			j nextStep
+		A2V:
+			addi $s4, $s4, -55
+			j nextStep
+		a2v:
+			addi $s4, $s4, -87
