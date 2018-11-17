@@ -104,14 +104,14 @@
 		beqz $s4, decimalnum
 		beq $s4, $t1, decimalnum
 		slti $t6, $s4, 58
-		bne $t6, $zero, 029
+		bne $t6, $zero, zero2nine
 		slti $t6, $s4, 89
 		bne $t6, $zero, A2V
 		slti $t6, $s4, 121
 		bne $t6, $zero, a2v
 		
 
-		029:
+		zero2nine:
 			addi $s4, $s4, -48
 			j loadexP
 		A2V:
